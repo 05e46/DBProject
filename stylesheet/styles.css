@@ -1,0 +1,68 @@
+.navbar {
+    margin-bottom: 0;
+    border-radius: 0;
+}
+
+
+/* Add a gray background color and some padding to the footer */
+
+/*footer {
+    background-color: #C0C0C0;
+    padding: 25px;
+}*/
+
+.col-sm-3 {
+  margin-top: 10px;
+}
+
+
+@media (max-width: 600px) {
+    .carousel-caption {
+        display: none;
+    }
+}
+
+.row.content {
+    height: 550px
+}
+
+.sidenav {
+    background-color: #f1f1f1;
+    height: 100%;
+    width: 15%;
+}
+
+@media screen and (max-width: 767px) {
+    .row.content {
+        height: auto;
+    }
+    .posts {-webkit-flex:5 0px;flex:5 0px;-webkit-order:2;order:2;}
+    footer {-webkit-order:3;order:3;}
+}
+
+.flex-container {
+    display: -webkit-flex;
+    display: flex;  
+    -webkit-flex-flow: row wrap;
+    flex-flow: row wrap;
+    text-align: center;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+/* for the text box */
+.flex-container > * {
+    padding: 15px;
+    -webkit-flex: 1 100%;
+    flex: 1 100%;
+    padding-left: 100px;
+    padding-right: 100px;
+}
+
+.posts {
+    text-align: left;
+    background-color: #A9A9A9;
+}
+
