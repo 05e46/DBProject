@@ -35,8 +35,8 @@
                             <input type="text" class="form-control" placeholder="Search"> </div>
                         <button type="submit" class="btn btn-default">Search</button>
                     </form>
-                    <li><a href="#">Sign in</a></li>
-                    <li><a href="#">Sign up</a></li>
+                    <li><a href="login.php">Sign in</a></li>
+                    <li><a href="register.php">Sign up</a></li>
                 </ul>
             </div>
         </div>
