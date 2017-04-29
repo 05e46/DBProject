@@ -20,9 +20,11 @@ mysql_select_db("cs431s25",$link);
 $sql="INSERT INTO USERS (fullname, username,passWd)
   VALUE('$FullName','$username','$password')";
 $result=mysql_query($sql,$link);
+
 if($result){
     echo'<p>Record added successfully</p>';
     echo'<p>You will be directed to the login page!</p>';
+    //link to login page
     include "login.php;
 }
 else{
@@ -30,4 +32,5 @@ else{
 }
 
 mysql_close($link);
+
 ?>

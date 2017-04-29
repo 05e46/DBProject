@@ -3,7 +3,7 @@
     <?php
 /*Checking validity of the data entered by the user with the database */
 $user=$_POST=['userName'];
-$password=$_POST['passWord'];
+$pswd=$_POST=['passWord'];
     
 //Link to database
     $conn=mysql_connect('ecsmysql','cs431s25','ixupeijo');
@@ -16,7 +16,7 @@ $password=$_POST['passWord'];
     }
 //Check if user is in database
     mysql_select_db("cs431s25",$conn);
-    $sql="SELECT username, passwd from USERS where username=$user and passwd=$password";
+    $sql="SELECT username, passwd from USERS where username=$user and passwd=$pswd";
     $result = mysql_query($sql,$conn);
     if(!$result){
         echo'<p>Username not found</p>';
