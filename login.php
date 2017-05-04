@@ -5,7 +5,12 @@
   }
   $username = $_POST['username'];
   $password = $_POST['password'];
-  $db = new mysqli('127.0.0.1','phpAdmin','password','practice'); #(ip address, username, password, database)
+
+/*credentials for cs431s25 server
+'ecsmysql','cs431s25','ixupeijo'
+*/
+
+  $db = new mysqli('ecsmysql','cs431s25','ixupeijo'); #(ip address, username, password, database)
   if(!$db){
     echo "Error connecting to database.";
     exit;
