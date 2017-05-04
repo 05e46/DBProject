@@ -23,7 +23,7 @@
     $stmt->close();
     $db->close();
     echo "<p>There are no users matching this username and password.<br>Please try again</p>";
-    echo "<form action='index.html'><input type='submit' value='Go Back'>";
+    echo "<form action='login_register.html'><input type='submit' value='Go Back'>";
     exit;
   }
   else {
@@ -32,6 +32,6 @@
     session_start();
     $_SESSION['user'] = $username;
     $_SESSION['login'] = $password;
-    header("Location: dashboard.php");
+    header("Location: dashboard.html");
   }
 ?>
