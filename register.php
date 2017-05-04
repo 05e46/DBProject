@@ -1,36 +1,36 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Register</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="stylesheet/styles.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<?php
+/*Data from user is sent to this file for processing*/
+//Set Variables for user input
+    
+$FullName=$_POST['fullname'];
+$username=$_POST['newusername'];
+$password=$_POST['newpssw'];
 
-</head>
-<body>
-<div class="flex-container">
 
-<form action="dashboard.php" method="POST">
-    <h3>Please enter the following fields</h3>
-    <label for="fullname" class="sr-only">New User</label>
-    <input type="text" name="fullname"  class="form-control" placeholder="Full Name" required>
-    <br>
-    <br>
-    <label for="newusername" class="sr-only">New Username</label>
-    <input type="text" name="newusername" class="form-control" placeholder="New Username" required>
-    <br>
-    <br>
-    <label for="newpssw" class="sr-only">New Password</label>
-    <input type="password" name="newpssw" class="form-control" placeholder="New Password" required>
-    <br>
-    <br>
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
-</form>
-</div>
+$link=mysql_connect('ecsmysql','cs431s25','ixupeijo');
+//Test Connection
+if(!link){
+    die('Failed to connect to Database'.mysql_err());
+}
+else{
+    echo'<p>Connected to Database</p>';
+}
 
-</body>
+mysql_select_db("cs431s25",$link);
+$sql="INSERT INTO USERS (fullname, username,passWd)
+  VALUE('$FullName','$username','$password')";
+$result=mysql_query($sql,$link);
 
-</html>
+if($result){
+    echo'<p>Record added successfully</p>';
+    echo'<p>You will be directed to the login page!</p>';
+    //link to login page
+    include "login.php;
+}
+else{
+    echo'Error: Record not added' .mysql_error($link);
+}
+
+mysql_close($link);
+
+?>
