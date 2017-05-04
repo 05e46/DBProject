@@ -14,4 +14,6 @@ Currently Working
 -intermediary steps from login/register to dashboard
 
 
-change tabs, 
+
+
+register.php and login.php are hidden from users unless successful in register/login
