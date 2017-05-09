@@ -13,8 +13,8 @@
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button> <a class="navbar-brand" href="dashboard.php">DBProject</a> </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-                <li><a href="#">Dashboard</a></li>
-                <li><a href="#">Threads</a></li>
+                <li><a href="/dashboard.php">Dashboard</a></li>
+                <li><a href="/forum.php">Forums</a></li>
                 <li><a href="#">Chatrooms</a></li>
 
                 <!-- <li class="dropdown"> <a class="dropdown-toggle" data-toggle="dropdown" href="#">Tags<span class="caret"></span></a>
