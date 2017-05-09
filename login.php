@@ -3,8 +3,8 @@
     echo "<p>No data was sent.<br>Please try again.</p>";
     exit;
   }
-  $username = $_POST['username'];
-  $password = $_POST['password'];
+  $username = $_POST['Username'];
+  $password = $_POST['passWord'];
 
 /*credentials for cs431s25 server
 'ecsmysql','cs431s25','ixupeijo'
@@ -15,8 +15,8 @@
     echo "Error connecting to database.";
     exit;
   }
-  $stmt = $db->prepare("SELECT Username, Password, Status FROM Users WHERE Username = ? AND Password = ?");
-  $stmt->bind_param("sss", $username, $password);
+  $stmt = $db->prepare("SELECT Username, Password, Status FROM User WHERE Username = ? AND Password = ?");
+  $stmt->bind_param("ss", $username, $password);
   $stmt->execute();
   $stmt->bind_result($u, $p, $status);
   if ($stmt->fetch() == FALSE) {
@@ -33,6 +33,6 @@
     $_SESSION['status'] = $status;
     $stmt->close();
     $db->close();
-    header("Location: dashboard.html");
+    header("Location: dashboard.php");
   }
 ?>
