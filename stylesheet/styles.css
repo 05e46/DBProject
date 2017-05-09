@@ -1,3 +1,7 @@
+html,body {
+  height:100%;
+}
+
 .navbar {
     margin-bottom: 0;
     border-radius: 0;
@@ -86,4 +90,8 @@
 #register {
     overflow: hidden;
     padding-left: 50px;
+}
+
+#mailbox, #messages, #forumContributions {
+  height:100%;
 }
