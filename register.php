@@ -1,3 +1,5 @@
+<?php session_start(); ?>
+
 <?php
 /*Data from user is sent to this file for processing*/
 //Set Variables for user input
@@ -7,7 +9,7 @@ $username=$_POST['newusername'];
 $password=$_POST['newpssw'];
 
 //Connect to database
-$db = new mysqli('127.0.0.1','phpAdmin','password','practice'); #(ip address, username, password, database)
+$db = new mysqli('127.0.0.1','root','','dbproject'); #(ip address, username, password, database)
 if(!$db){
   echo "Error connecting to database.";
   exit;
@@ -37,11 +39,8 @@ else {
     header("Location: dashboard.html");
   }
   else {
-    echo "<h1>Error creating username</h1>"
+    echo "<h1>Error creating username</h1>";
     echo "<form action='login_register.html'><input type='submit' value='Try Again'>";
   }
 }
-
-
-
 ?>

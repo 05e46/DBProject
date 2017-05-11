@@ -1,25 +1,25 @@
 <?php
-  session_start();
-  $db = new mysqli('127.0.0.1','phpAdmin','password','practice'); #(ip address, username, password, database)
+  $db = new mysqli('127.0.0.1','root','','dbproject'); #(ip address, username, password, database)
   if(!$db){
     echo "Error connecting to database.";
     exit;
   }
 ?>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="stylesheet/styles.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <nav class="navbar navbar-inverse">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button> <a class="navbar-brand" href="login_register.html">DBProject</a> </div>
-            <div class="collapse navbar-collapse" id="myNavbar">
-                <ul class="nav navbar-nav">
-                    <?php
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="stylesheet/styles.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button> <a class="navbar-brand" href="login_register.html">DBProject</a> </div>
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav">
+                        <?php
                       if (basename($_SERVER['PHP_SELF']) != "dashboard.php") {
                         echo '<li><a id= "dashboardButton" href="/dashboard.php">Dashboard</a></li>';
                       }
@@ -27,21 +27,21 @@
                         echo '<li><a id="forumButton" href="/forum.php">Forums</a></li>';
                       }
                     ?>
-                    <li><a id="chatButton" href="#">Chatrooms</a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <form class="navbar-form navbar-left">
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Search"> </div>
-                        <button type="submit" class="btn btn-default">Search</button>
-                        <?php
+                            <li><a id="chatButton" href="#">Chatrooms</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <form class="navbar-form navbar-left">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Search"> </div>
+                            <button type="submit" class="btn btn-default">Search</button>
+                            <?php
                           if ($_SESSION["user"]){
                             echo '<button id="logout">Logout</button>';
                           }
                         ?>
-                    </form>
-                </ul>
+                        </form>
+                    </ul>
+                </div>
             </div>
-        </div>
-    </nav>
-</head>
+        </nav>
+    </head>
