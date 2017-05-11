@@ -14,13 +14,13 @@ include('header.php');
       </thead>
       <tbody>
     <?php
-      $stmt = $db->prepare("SELECT ForumId, ForumName, Description, StartModerator FROM Forum WHERE Status = 'open'");
+      $stmt = $db->prepare("SELECT ForumId, ForumName, Description, StartModerator FROM Forum");
       $stmt->execute();
       $stmt->bind_result($id, $forumName, $description, $starter);
       while ($stmt->fetch() == TRUE) {
         echo '
-        <tr class="forum-row" data-href="url:thread.php" data-id="'.$id.'">
-        <td><strong>'.$forumName.'</strong></td>
+        <tr>
+        <td><a href="thread.php?id='.$id.'"><strong>'.$forumName.'</strong></a></td>
         <td>'.$description.'</td>
         <td>'.$starter.'</td>
         </tr>
@@ -32,13 +32,3 @@ include('header.php');
       </tbody>
     </table>
 </body>
-<footer>
-  <script>
-    jQuery(document).ready(function($) {
-      $(".forum-row").click(function() {
-          var forum = $(this).data("id");
-          window.location = $(this).data("href");
-      });
-    });
-  </script>
-</footer>

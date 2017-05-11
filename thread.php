@@ -17,13 +17,14 @@ include('header.php');
       </thead>
       <tbody>
         <?php
-          $stmt = $db->prepare("SELECT ForumNo, Title, StartUser, Ranking FROM Thread WHERE Status = 'open' AND ForumNo = 2");
+          $id = $_GET["id"];
+          $stmt = $db->prepare("SELECT threadID, Title, StartUser, Ranking FROM Thread WHERE ForumNo = $id");
           $stmt->execute();
-          $stmt->bind_result($id, $threadTitle, $starter, $rank);
+          $stmt->bind_result($threadID, $threadName, $starter, $rank);
           while ($stmt->fetch() == TRUE) {
             echo '
-            <tr class="thread-row" data-href="url:userPosts.php" data-id="'.$id.'">
-            <td><strong>'.$threadTitle.'</strong></td>';
+            <tr>
+            <td><a href="userPosts.php?id='.$threadID.'"><strong>'.$threadName.'</strong></a></td>';
             if ($rank == 1) {
                 echo '<td><span class="glyphicon-class yellow"></span></td>';
               }
@@ -57,7 +58,7 @@ include('header.php');
                 echo '<span class="glyphicon glyphicon-star yellow"></span>';
                 echo '</td>';
               }
-            else {echo'<td></td>';}
+            else {echo'<td>Not yet ranked</td>';}
             echo '
             <td>'.$starter.'</td>
             </tr>
