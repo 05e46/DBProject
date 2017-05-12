@@ -9,7 +9,7 @@
 /*credentials for cs431s25 server
 'ecsmysql','cs431s25','ixupeijo'
 */
-  //$db = new mysqli('ecsmysql','cs431s25','ixupeijo','[project_databse]');
+  //$db = new mysqli('ecsmysql','cs431s25','ixupeijo','cs431s25');
   $db = new mysqli('127.0.0.1','root','','dbproject'); #(ip address, username, password, database)
   if(!$db){
     echo "Error connecting to database.";
