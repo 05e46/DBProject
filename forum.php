@@ -41,11 +41,11 @@ include('header.php');
         <?php
         /*if $_SESSION['user'] == 'admin'{
           //show the create forum button on bottom of page
+          <!-- Trigger the create forum Modal -->
+          echo '<button type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#newForum" style="float: right">Create Forum</button>';
         }*/
         ?>
         <div class="container">
-            <!-- Trigger the create forum Modal -->
-            <button type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#newForum" style="float: right">Create Forum</button>
 
             <!-- Modal -->
             <div class="modal fade" id="newForum" role="dialog">
@@ -74,10 +74,10 @@ include('header.php');
             <?php
             /*if $_SESSION['user'] == 'moderator'{
               //show the request forum button on bottom of page
+              <!-- Trigger the request Modal -->
+                echo '<button type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#requestForum" style="float: right">Request Forum</button>';
             }*/
             ?>
-            <!-- Trigger the request Modal -->
-            <button type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#requestForum" style="float: right">Request Forum</button>
 
             <!-- Modal -->
             <div class="modal fade" id="requestForum" role="dialog">
