@@ -8,6 +8,7 @@ include('header.php');
         <table class="table table-striped table-bordered table-hover">
             <thead>
                 <tr>
+                    <!-- titles at the top of the table -->
                     <th>Forum Name</th>
                     <th>Description</th>
                     <th>Moderator</th>
@@ -16,6 +17,7 @@ include('header.php');
             <tbody>
 
               <?php
+              // get ForumId, ForumName, Description, StartModerator from Forum table
               $stmt = $db->prepare("SELECT ForumId, ForumName, Description, StartModerator FROM Forum");
               $stmt->execute();
               $stmt->bind_result($id, $forumName, $description, $starter);

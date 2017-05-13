@@ -26,8 +26,11 @@
                       if (basename($_SERVER['PHP_SELF']) != "forum.php") {
                         echo '<li><a id="forumButton" href="/forum.php">Forums</a></li>';
                       }
+                      if (basename($_SERVER['PHP_SELF']) != "chatroom.php") {
+                        echo '<li><a id="chatroomButton" href="/chatroom.php">Chatrooms</a></li>';
+                      }
                     ?>
-                            <li><a id="chatButton" href="#">Chatrooms</a></li>
+                            <!-- <li><a id="chatButton" href="#">Chatrooms</a></li> -->
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <form class="navbar-form navbar-left">

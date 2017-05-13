@@ -23,7 +23,7 @@ $Max_id = 1;
 }
 
 // get values that sent from form
-$postuser=$_POST['postuser'];
+//$postuser=$_POST['postuser'];
 $posttext=$_POST['postText'];
 $datetime=date("d/m/y H:i:s"); // create date and time
 
@@ -33,7 +33,7 @@ $result2=mysql_query($sql2);
 
 if($result2){
 echo "Successful<BR>";
-echo "<a href='view_topic.php?id=".$id."'>View your post</a>";
+echo "<a href='userPosts.php?id=".$id."'>View your post</a>";
 
 // If added new answer, add value +1 in reply column
 $tbl_name2="thread";

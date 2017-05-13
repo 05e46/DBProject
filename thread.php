@@ -66,6 +66,38 @@ include('header.php');
           }
           $stmt->close();
         ?>
+
+        <?php
+        /*if $_SESSION['user'] == 'moderator' && $_SESSION['user'] == 'admin' {
+          //show the request forum button on bottom of page
+          <!-- Trigger the request Modal -->
+            echo '<button type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#requestForum" style="float: right">Request Forum</button>';
+        }*/
+        ?>
+
+        <!-- Modal -->
+        <div class="modal fade" id="requestForum" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Request Forum</h4>
+                    </div>
+                    <div class="modal-body">
+                        <label>Name: </label>
+                        <br />
+                        <label>Description: </label>
+                        <br />
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
       </tbody>
     </table>
 </body>

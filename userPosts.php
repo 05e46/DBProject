@@ -10,9 +10,16 @@ include('header.php');
     <h1>Posts</h1>
   </div>
 
+  <!-- get the froum name and start moderator and date -->
+  <div id="forumpost">
+    <?php
+    $sql = "SELECT
+
+    ?>
+
 <div id="postarea">
     <?php
-    $id = $_GET['id'];
+    $id = $_POST['id'];
     $stmt = $db->prepare("SELECT postId, postuser, postText FROM Post WHERE threadNo = '$id' ORDER BY postId" );
     $stmt->execute();
     $stmt->bind_result($postId, $postuser, $postText);
@@ -37,10 +44,10 @@ include('header.php');
                         </td>
                     </tr>
                     <tr>
-                        <td bgcolor="#F8F7F1"><strong>By :</strong>
+                        <td bgcolor="#F8F7F1"><strong>By: </strong>
                             <?php echo $postuser; ?>
                         </td>
-                        <td bgcolor="#F8F7F1"><strong>Date/time : </strong>
+                        <td bgcolor="#F8F7F1"><strong>Date/time: </strong>
                             <?php echo $datetime; ?>
                         </td>
                     </tr>
