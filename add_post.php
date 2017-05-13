@@ -1,49 +1,29 @@
 <?php
+session_start();
+include('header.php');
 
-$host="localhost"; // Host name
-$username="root"; // Mysql username
-$password=""; // Mysql password
-$db_name="dbproject"; // Database name
-$tbl_name="thread"; // Table name
-
-// Get value of id that sent from hidden field
-$id=$_POST['id'];
-
-// Find highest answer number.
-$sql="SELECT MAX(threadID) AS Maxa_id FROM $tbl_name WHERE threadNo ='$id'";
-$result=mysql_query($sql);
-$rows=mysql_fetch_array($result);
-
-// add + 1 to highest answer number and keep it in variable name "$Max_id". if there no answer yet set it = 1
-if ($rows) {
-$Max_id = $rows['Maxa_id']+1;
-}
-else {
-$Max_id = 1;
+$db = new mysqli('127.0.0.1','root','','dbproject'); #(ip address, username, password, database)
+if(!$db){
+  echo "Error connecting to database.";
+  exit;
 }
 
-// get values that sent from form
-//$postuser=$_POST['postuser'];
-$posttext=$_POST['postText'];
-$datetime=date("d/m/y H:i:s"); // create date and time
-
-// Insert answer
-$sql2="INSERT INTO $tbl_name(threadNo, postId, postuser, posttext, postdatetime)VALUES('$id', '$Max_id', '$postuser', '$posttext', '$datetime')";
-$result2=mysql_query($sql2);
-
-if($result2){
-echo "Successful<BR>";
-echo "<a href='userPosts.php?id=".$id."'>View your post</a>";
-
-// If added new answer, add value +1 in reply column
-$tbl_name2="thread";
-$sql3="UPDATE $tbl_name2 SET reply='$Max_id' WHERE id='$id'";
-$result3=mysql_query($sql3);
-}
-else {
-echo "ERROR";
+//check to see if the user is logged in
+if(isset($_SESSION['user']) == FALSE){
+  echo "Please login to post";
 }
 
-// Close connection
-mysql_close();
+  $stmt = $db->prepare("INSERT INTO post (postText, postUser, uploadDate) VALUES (?,?,?)");
+  $stmt->bind_param("sss", $postText, $postUser, $uploadDate);
+  if ($stmt->execute()) {
+    $stmt->close();
+    $db->close();
+    session_start();
+    $_SESSION['user'] = $username;
+    header("Location: userPosts.php");
+  }
+  else {
+    echo "<h1>Error entering post</h1>";
+    echo "<form action='userPosts.php'><input type='submit' value='Go Back'>";
+  }
 ?>

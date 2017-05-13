@@ -1,6 +1,8 @@
 <?php
+session_start();
 include('header.php');
 ?>
+
 <body>
   <div class="flex-container">
     <div class="pull-left">

@@ -39,7 +39,7 @@
                             <button type="submit" class="btn btn-default">Search</button>
                             <?php
                           if ($_SESSION["user"]){
-                            echo '<button id="logout">Logout</button>';
+                            echo '<a href="logout.php">Logout</a>';
                           }
                         ?>
                         </form>

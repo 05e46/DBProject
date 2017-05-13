@@ -20,9 +20,9 @@
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button> <a class="navbar-brand" href="dashboard.php">DBProject</a> </div>
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav">
-                    <li><a href="#">Dashboard</a></li>
-                    <li><a href="#">Threads</a></li>
-                    <li><a href="#">Chatrooms</a></li>
+                    <li><a href="login_register.html">Dashboard</a></li>
+                    <li><a href="forums.php">Forums</a></li>
+                    <li><a href="chatroom.php">Chatrooms</a></li>
 
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
@@ -58,23 +58,23 @@
                 <form action="register.php" method="POST">
                     <h3>Don't have an account? Sign up!</h3>
                     <br>
-                    <label for="fullname" class="sr-only">New User</label>
+                    <!-- <label for="fullname" class="sr-only">New User</label> -->
                     <input type="text" name="fullname" class="form-control" placeholder="Full Name" required>
                     <br>
                     <br>
-                    <label for="newusername" class="sr-only">New Username</label>
+                    <!-- <label for="newusername" class="sr-only">New Username</label> -->
                     <input type="text" name="newusername" class="form-control" placeholder="Username" required>
                     <br>
                     <br>
-                    <label for="newpssw" class="sr-only">New Password</label>
-                    <input type="password" name="newpssw" class="form-control" placeholder="Password" required>
+                    <!-- <label for="newpssw" class="sr-only">New Password</label> -->
+                    <input type="password" name="password1" class="form-control" placeholder="Password" required>
                     <br>
                     <br>
-                    <label for="chkpssw" class="sr-only">Check Password</label>
-                    <input type="password" name="newpssw" class="form-control" placeholder="Re-enter Password" required>
+                    <!-- <label for="chkpssw" class="sr-only">Check Password</label> -->
+                    <input type="password" name="password2" class="form-control" placeholder="Re-enter Password" required>
                     <br>
                     <br>
-                    <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+                    <button class="btn btn-lg btn-primary btn-block" name="submit" input type="submit">Register</button>
                 </form>
             </div>
         </div>

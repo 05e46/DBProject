@@ -7,10 +7,8 @@
 
 <body>
     <?php
-include('header.php'); 
+include('header.php');
 ?>
-
-
     <div class="flex-container">
         <div id="wrapper">
             <div id="login">

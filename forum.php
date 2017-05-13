@@ -1,4 +1,5 @@
 <?php
+session_start();
 include('header.php');
 ?>
 
@@ -67,7 +68,7 @@ include('header.php');
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button class="btn btn-primary">Save changes</button>
+                            <button type="submit" class="btn btn-primary">New Forum</button>
                         </div>
                     </div>
                 </div>
@@ -99,6 +100,7 @@ include('header.php');
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Submit request</button>
                         </div>
                     </div>
                 </div>

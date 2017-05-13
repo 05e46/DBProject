@@ -1,10 +1,10 @@
-<?php session_start(); ?>
+<?php session_start();
 
+/*
 <?php
 /*Data from user is sent to this file for processing*/
 //Set Variables for user input
-
-$fullName=$_POST['fullname'];
+/*$fullName=$_POST['fullname'];
 $username=$_POST['newusername'];
 $password=$_POST['newpssw'];
 
@@ -14,6 +14,7 @@ if(!$db){
   echo "Error connecting to database.";
   exit;
 }
+
 //Check if username already exists
 $stmt = $db->prepare("SELECT Username FROM Users WHERE Username = ?");
 $stmt->bind_param("s", $username);
@@ -43,4 +44,29 @@ else {
     echo "<form action='login_register.html'><input type='submit' value='Try Again'>";
   }
 }
+?>*/
+
+$dbhost = "localhost";
+$dbuser = "root";
+$dbpassword = "";
+$dbdatabase = "dbproject";
+
+
+$db = mysql_connect($dbhost, $dbuser, $dbpassword);
+
+//check to see if the submit button has been pressed
+mysql_select_db($dbdatabase, $db);
+if($_POST['submit']){
+  if($_POST['password1'] == $_POST['password2']){
+    $checksql = "SELECT * FROM users WHERE username = '".$_POST['username']."';";
+    $checkresult = mysql_query($checksql);
+    $checknumrows = mysql_num_rows($checkresult);
+    if($checknumrows == 1){
+      header("Location: login_register.html")
+      echo "username already exits or passwords do not match";
+    }
+  }
+}
+
+
 ?>
