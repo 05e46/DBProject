@@ -1,12 +1,10 @@
 <?php session_start();
 
-/*
-<?php
 /*Data from user is sent to this file for processing*/
 //Set Variables for user input
-/*$fullName=$_POST['fullname'];
-$username=$_POST['newusername'];
-$password=$_POST['newpssw'];
+$username=$_POST['username'];
+$fullName=$_POST['fullname'];
+$password=$_POST['password'];
 
 //Connect to database
 $db = new mysqli('127.0.0.1','root','','dbproject'); #(ip address, username, password, database)
@@ -16,10 +14,10 @@ if(!$db){
 }
 
 //Check if username already exists
-$stmt = $db->prepare("SELECT Username FROM Users WHERE Username = ?");
+/*$stmt = $db->prepare("SELECT Username FROM Users WHERE Username = ?");
 $stmt->bind_param("s", $username);
 $stmt->execute();
-$stmt->store_result();
+$stmt->store_result();*/
 
 //If username already exists
 if ($stmt->num_rows == 0) {
@@ -29,8 +27,8 @@ if ($stmt->num_rows == 0) {
 //Username does NOT already exists and can be created in the database
 else {
   $stmt->close();
-  $stmt = $db->prepare("INSERT INTO Users (Username, Password, FullName) VALUES (?,?,?)");
-  $stmt->bind_param("sss", $username, $password, $fullName);
+  $stmt = $db->prepare("INSERT INTO Users (username, fullname, password) VALUES (?,?,?)");
+  $stmt->bind_param("sss", $fullname, $username, $password);
   if ($stmt->execute()) {
     $stmt->close();
     $db->close();
@@ -44,29 +42,32 @@ else {
     echo "<form action='login_register.html'><input type='submit' value='Try Again'>";
   }
 }
-?>*/
 
-$dbhost = "localhost";
-$dbuser = "root";
-$dbpassword = "";
-$dbdatabase = "dbproject";
+/*session_start();
+$_SESSION['message'] = '';
+$msqli = new mysqli('localhost', 'root', '', 'dbproject');
+
+if($_SERVER['REQUEST_METHOD'] == 'POST'){
+	//two passwords are equal to each other
+	if($_POST['password'] == $_POST['confirmpassword']){
+		$username = $mysqli->mysql_real_escape_string($_POST['username']);
+		$password = md5($_POST['password']); //md5 for password security
+
+		$sql = "INSERT INTO users(username, password"
+			. VALUES('username', 'password');
+
+		if($mysqli->query($sql) === true){
+			$_SESSION['message'] = 'Registration successful';
+			header("location: dashboard.php");
+		}
+		else {
+			$_SESSION['message'] = 'Usern could not be added to the database';
+		}
+	}
+}*/
 
 
-$db = mysql_connect($dbhost, $dbuser, $dbpassword);
 
-//check to see if the submit button has been pressed
-mysql_select_db($dbdatabase, $db);
-if($_POST['submit']){
-  if($_POST['password1'] == $_POST['password2']){
-    $checksql = "SELECT * FROM users WHERE username = '".$_POST['username']."';";
-    $checkresult = mysql_query($checksql);
-    $checknumrows = mysql_num_rows($checkresult);
-    if($checknumrows == 1){
-      header("Location: login_register.html")
-      echo "username already exits or passwords do not match";
-    }
-  }
-}
 
 
 ?>

@@ -3,6 +3,7 @@
     echo "<p>No data was sent.<br>Please try again.</p>";
     exit;
   }
+
   $username = $_POST['Username'];
   $password = $_POST['passWord'];
 

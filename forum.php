@@ -35,74 +35,70 @@ include('header.php');
               $db->close();
               ?>
 
-            </tbody>
-        </table>
-
-
         <!-- Buttons for the Modal -->
         <!-- Button for Admin -->
-        <?php
-        /*if $_SESSION['user'] == 'admin'{
-          //show the create forum button on bottom of page
-          <!-- Trigger the create forum Modal -->
-          echo '<button type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#newForum" style="float: right">Create Forum</button>';
-        }*/
-        ?>
         <div class="container">
 
+          <?php
+          /*if $_SESSION['user'] == 'admin'{*/
+            //show the create forum button on bottom of page
+            echo '<button type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#newForum" style="float: right">Create Forum</button>';
+          //}
+          ?>
             <!-- Modal -->
             <div class="modal fade" id="newForum" role="dialog">
                 <div class="modal-dialog">
 
                     <!-- Modal content-->
-                    <div class="modal-content">
+                    <form class="modal-content" action="forumcreate.php" method="POST">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                             <h4 class="modal-title">New Forum</h4>
                         </div>
                         <div class="modal-body">
-                            <label>Name: </label>
+                          <input type="text" name="forumName" class="form-control" placeholder="Forum Name" required>
                             <br />
-                            <label>Description: </label>
+                            <input type="text" name="description" class="form-control" placeholder="Forum description" required>
                             <br />
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">New Forum</button>
+                            <button type="submit" name="newforum_btn" class="btn btn-primary">New Forum</button>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
 
             <?php
             /*if $_SESSION['user'] == 'moderator'{
-              //show the request forum button on bottom of page
-              <!-- Trigger the request Modal -->
+              //show the request forum button on bottom of page*/
                 echo '<button type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#requestForum" style="float: right">Request Forum</button>';
-            }*/
+            //}
             ?>
 
             <!-- Modal -->
             <div class="modal fade" id="requestForum" role="dialog">
                 <div class="modal-dialog">
-
                     <!-- Modal content-->
-                    <div class="modal-content">
+                    <form class="modal-content" action="forumRequests.php" method="POST">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                             <h4 class="modal-title">Request Forum</h4>
                         </div>
                         <div class="modal-body">
-                            <label>Name: </label>
+                          <input type="text" name="forumName" class="form-control" placeholder="Forum Name" required>
                             <br />
-                            <label>Description: </label>
+                            <input type="text" name="description" class="form-control" placeholder="Forum description" required>
                             <br />
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Submit request</button>
+                            <button type="submit" name="request_btn" class="btn btn-primary">Submit request</button>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
+          </div>
+        </tbody>
+      </table>
 </body>
