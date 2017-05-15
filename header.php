@@ -4,6 +4,9 @@
     echo "Error connecting to database.";
     exit;
   }
+
+  $status = $_SESSION['status'];
+  $user = $_SESSION['user'];
 ?>
 
     <head>

@@ -40,7 +40,8 @@ include('header.php');
         <div class="container">
 
           <?php
-          if ($_SESSION['user'] == 'admin'){
+          //admin has all the power can create forums
+          if ($_SESSION['status'] == 'admin'){
             echo '<button type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#newForum" style="float: right">Create Forum</button>';
           }
           ?>
@@ -69,7 +70,8 @@ include('header.php');
             </div>
 
             <?php
-            if ($_SESSION['user'] == 'moderator'){
+            // moderators can request forums
+            if ($_SESSION['status'] == 'moderator'){
                 echo '<button type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#requestForum" style="float: right">Request Forum</button>';
             }
             ?>
