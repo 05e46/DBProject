@@ -10,9 +10,10 @@ include('header.php');
     <div class="flex-container">
       <h1>Admin Settings</h1>
       <div class="row">
-        <div class="col-sm-5" id="accounts" style="overflow:scroll;border-style:solid;border-width:thin;">
+        <div class="col-sm-12" id="accounts">
           <h3>Accounts</h3>
-          <table class="table table-striped table-bordered table-hover">
+          <table class="table table-striped table-bordered table-hover" style="border: 2px solid black;">
+            <!-- Table column names -->
             <thead>
               <tr>
                 <th>Account</th>
@@ -21,6 +22,7 @@ include('header.php');
                 <th>Options</th>
               </tr>
             </thead>
+            <!-- Table data -->
             <tbody>
               <?php
                 $stmt = $db->prepare("SELECT Username, FullName, Status FROM User");
@@ -43,7 +45,9 @@ include('header.php');
             </tbody>
           </table>
         </div>
-        <div class="col-sm-7" id="forumContributions" style="border-style:solid;border-width:thin;">
+      </div>
+      <div class="row">
+        <div class="col-sm-12" id="requests">
           <div id="forumRequests" style="overflow:scroll; height:300px;border-style:solid;border-width:thin;border-color:lightgrey;">
             <h3>Forum Requests</h3>
             <table class="table table-striped table-bordered table-hover">
@@ -74,38 +78,7 @@ include('header.php');
             </tbody>
           </table>
           </div>
-          <div id="moderatorRequests" style="overflow:scroll; height:300px;border-style:solid;border-width:thin;border-color:lightgrey;">
-            <h3>Moderator Requests</h3>
-            <table class="table table-striped table-bordered table-hover">
-              <thead>
-                <tr>
-                  <th>Username</th>
-                  <th>Full Name</th>
-                  <th>Options</th>
-                </tr>
-              </thead>
-              <tbody>
-                <?php
-                  $stmt = $db->prepare("SELECT Username, FullName, Status FROM User");
-                  $stmt->execute();
-                  $stmt->bind_result($user, $name, $status);
-                  while ($stmt->fetch() == TRUE) {
-                    echo '
-                    <tr>
-                    <td>'.$user.'</td>
-                    <td>'.$name.'</td>
-                    <td>
-                      <button><span href="remove.php?account="'.$user.'" class="glyphicon glyphicon-trash"></span> </button>
-                      <button><span href="remove.php?account="'.$user.'" class="glyphicon glyphicon-ok"></span></button>
-                    </td>
-                    </tr>
-                    ';
-                  }
-                  $stmt->close();
-                ?>
-            </tbody>
-          </table>
-          </div>
       </div>
+    </div>
     </div>
   </body>

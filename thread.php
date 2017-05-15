@@ -21,16 +21,17 @@ $user = $_SESSION['user'];
       </thead>
       <tbody>
         <?php
-          $id = (isset($_GET['id']) ? $_GET['id'] : '');
+          $id = $_REQUEST['id'];
           //get the threadId, title, startuser and ranking from thread where the forumno is connect to number forum
-          $stmt = $db->prepare("SELECT threadID, Title, StartUser, ranking FROM Thread WHERE forumNo = $id");
+          $stmt = $db->prepare("SELECT threadID, Title, StartUser, ranking FROM Thread WHERE forumNo = ?");
+          $stmt->bind_param("s", $id);
           $stmt->execute();
           $stmt->bind_result($threadID, $threadName, $starter, $rank);
 
           while ($stmt->fetch() == TRUE) {
             echo '
             <tr>
-            <td><a href="userPosts.php?id='.$threadID.'"><strong>'.$threadName.'</strong></a></td>';
+            <td><a href="userPosts.php?id='.$threadID.'&forum='.$id.'"><strong>'.$threadName.'</strong></a></td>';
             if ($rank == 1) {
                 echo '<td><span class="glyphicon-class yellow"></span></td>';
               }

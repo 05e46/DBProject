@@ -8,7 +8,8 @@ $threadID = $_SESSION['threadID'];
 <body>
   <div class="flex-container">
     <div class="pull-left">
-      <a id="backToThread" href="/Thread.php">Back to Threads</a>
+      <?php echo '<a id="backToThread" href="/Thread.php?id='.$_REQUEST['forum'].'">Back to Threads</a>' ?>
+      <!-- <a id="backToThread" href="/Thread.php?id=<?php $_REQUEST['forum']?>">Back to Threads</a> -->
     <h1>Posts</h1>
   </div>
 
