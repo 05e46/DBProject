@@ -11,7 +11,8 @@
 'ecsmysql','cs431s25','ixupeijo'
 */
   //$db = new mysqli('ecsmysql','cs431s25','ixupeijo','cs431s25');
-  $db = new mysqli('127.0.0.1','root','','dbproject'); #(ip address, username, password, database)
+  $db = new mysqli('127.0.0.1', 'phpAdmin', 'password', 'practice');
+  //$db = new mysqli('127.0.0.1','root','','dbproject'); #(ip address, username, password, database)
   if(!$db){
     echo "Error connecting to database.";
     exit;
