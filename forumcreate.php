@@ -18,9 +18,11 @@ if(isset($_REQUEST['submit'])!='')
     else
     {
       //Instantly creates a forum that can be viewed if the user is an admin
-      if ($_REQUEST['user'] == "admin") {
+      if ($_SESSION['status'] == "admin") {
+
         $status = "open";
-        $stmt = $db->prepare("INSERT INTO FORUM (forumName, description, StartModerator) VALUES (?,?,?,?)");
+        $query = "INSERT INTO Forum (forumName, description, StartModerator, Status) VALUES (?,?,?,?)";
+        $stmt = $db->prepare($query);
         $stmt->bind_param("ssss", $_REQUEST['forumName'], $_REQUEST['description'], $_REQUEST['user'], $status);
         if ($stmt->execute()){
           $stmt->close();
@@ -28,32 +30,30 @@ if(isset($_REQUEST['submit'])!='')
           header("Location: forum.php");
         }
         else {
-          echo "Something went wrong, can not add the forum";
+          echo "Something went wrong, can not add the forum ADMIN";
         }
       }
 
 
       //Instantly creates a forum that must be approved by an admin before being viewed
-      if ($_REQUEST['user'] == "moderator"){
-        $status = "request";
-        $stmt = $db->prepare("INSERT INTO FORUM (forumName, description, StartModerator) VALUES (?,?,?,?)");
-        $stmt->bind_param("ssss", $_REQUEST['forumName'], $_REQUEST['description'], $_REQUEST['user'], $status);
+      else if ($_SESSION['status'] == "moderator"){
+        $stmt = $db->prepare("INSERT INTO FORUM (ForumName, Description, StartModerator) VALUES (?,?,?)");
+        $stmt->bind_param("sss", $_REQUEST['forumName'], $_REQUEST['description'], $_REQUEST['user']);
         if ($stmt->execute()){
           $stmt->close();
           $db->close();
-          header("Location: forum.php");
-          alert("Forum awaiting approval from admin");
+          echo "Forum awaiting approval from admin.<p>";
+          echo "<button><a href='/forum.php'>Back to Forums</a></button>";
         }
         else {
-          echo "Something went wrong, can not add the forum";
+          echo "Something went wrong, can not add the forum MODERATOR";
         }
       }
 
-      
+
       //Something went wrong
       else {
-        header("Location: forum.php");
-        alert("Something has gone wrong. Unable to create forum");
+        echo "Something went wrong. Unable to create forum<p><button><a href='/forum.php'>Back</a></button>)";
 
       }
     }
