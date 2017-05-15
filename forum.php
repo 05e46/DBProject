@@ -43,28 +43,46 @@ include('header.php');
                     <!-- titles at the top of the table -->
                     <th>Forum Name</th>
                     <th>Description</th>
+                    <th>Status</th>
                     <th>Moderator</th>
+                    <?php
+                      if ($_SESSION['status'] == "admin"){
+                        echo '<th>Options</th>';
+                      }
+                    ?>
                 </tr>
             </thead>
             <tbody>
-
               <?php
+              $request = "request";
               // get ForumId, ForumName, Description, StartModerator from Forum table
-              $stmt = $db->prepare("SELECT ForumId, ForumName, Description, StartModerator FROM Forum WHERE Status = 'open'");
+              $stmt = $db->prepare("SELECT ForumId, ForumName, Description, StartModerator, Status FROM Forum WHERE NOT Status=?");
+              $stmt->bind_param("s", $request);
               $stmt->execute();
-              $stmt->bind_result($id, $forumName, $description, $starter);
+              $stmt->bind_result($id, $forumName, $description, $starter, $status);
               while ($stmt->fetch() == TRUE) {
-                echo '
-                <tr>
+                echo '<tr>
                 <td><a href="thread.php?id='.$id.'"><strong>'.$forumName.'</strong></a></td>
                 <td>'.$description.'</td>
-                <td>'.$starter.'</td>
-                </tr>
-                ';
+                <td>'.$status.'</td>
+                <td>'.$starter.'</td>';
+                if ($_SESSION['status'] == "admin"){
+                  echo '<td>';
+                  if ($status == "open"){
+                    echo '<button><a href="manageRequests.php?id='.$id.'&action=closed">Close Forum</a></button>';
+                  }
+                  else if ($status == "closed"){
+                    echo '<button><a href="manageRequests.php?id='.$id.'&action=open">Open Forum</a></button>';
+                  }
+                  echo '<button><a href="manageRequests.php?id='.$id.'&action=delete">Delete Forum</a></button>';
+                  echo '</td>';
+                }
+                echo '</tr>';
               }
               $stmt->close();
               $db->close();
               ?>
-        </tbody>
-      </table>
+            </tbody>
+        </table>
+    </div>
 </body>

@@ -13,8 +13,8 @@ if(!$db){
   exit;
 }*/
 
-
-$con = mysqli_connect('localhost', 'root', '', 'dbproject');
+//$con = mysqli_connect('localhost', 'root', '', 'DBproject');
+$con = mysqli_connect('127.0.0.1', 'phpAdmin', 'password', 'practice');
 if(! $con)
 {
 die('Connection Failed'.mysql_error());
