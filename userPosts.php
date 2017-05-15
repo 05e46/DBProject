@@ -20,12 +20,11 @@ include('header.php');
     $stmt->execute();
     $stmt->bind_result($threadNo, $postId, $postuser, $postText, $uploadDate);
     $threadID = $_SESSION['threadID'];
-    $_SESSION['threadNo'] = $threadNo;
 
     //check threadId and threadNo, then display
     //if ($threadID == $threadNo) {
     while ($stmt->fetch() == TRUE) {
-      //if ($threadID == $threadNo) {
+      if ($threadID == $threadNo) {
       echo '
       <tr>
         <td>
@@ -43,10 +42,10 @@ include('header.php');
       </tr>
       <br>
       ';
-    }
+    //}
     $stmt->close();
-  //}
-//}
+  }
+}
     ?>
   </tbody>
 

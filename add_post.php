@@ -1,6 +1,7 @@
 <?php
 session_start();
-include('header.php');  
+include('header.php');
+$threadID = $_SESSION['threadID'];
 
 $con = mysqli_connect('localhost', 'root', '', 'dbproject');
 if(! $con)
@@ -17,7 +18,7 @@ if(isset($_REQUEST['submit'])!='')
     }
     else
     {
-        $sql="INSERT INTO post(postText,uploadDate,postUser) VALUES('".$_REQUEST['postText']."', NOW() , '$user')";
+        $sql="INSERT INTO post(threadNo,postText,uploadDate,postUser) VALUES('$threadID','".$_REQUEST['postText']."', NOW() , '$user')";
         $res=mysqli_query($con,$sql);
         if($res)
         {
