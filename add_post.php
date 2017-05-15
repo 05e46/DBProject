@@ -2,7 +2,41 @@
 session_start();
 include('header.php');
 
-$db = new mysqli('127.0.0.1','root','','dbproject'); #(ip address, username, password, database)
+$con = mysqli_connect('localhost', 'root', '', 'dbproject');
+if(! $con)
+{
+die('Connection Failed'.mysql_error());
+}
+$user = $_SESSION['user'];
+
+if(isset($_REQUEST['submit'])!='')
+{
+    If($_REQUEST['postText']=='')
+    {
+        Echo "please fill the empty field.";
+    }
+    else
+    {
+        $sql="INSERT INTO post(postText,uploadDate,postUser) VALUES('".$_REQUEST['postText']."', NOW() , '$user')";
+        $res=mysqli_query($con,$sql);
+        if($res)
+        {
+            header("Location: userPosts.php");
+            $sql->close();
+            $con->close();
+        }
+        else
+        {
+          echo "Something went wrong, can not add the forum";
+        }
+    }
+}
+
+
+
+
+
+/*$db = new mysqli('127.0.0.1','root','','dbproject'); #(ip address, username, password, database)
 if(!$db){
   echo "Error connecting to database.";
   exit;
@@ -25,5 +59,5 @@ if(isset($_SESSION['user']) == FALSE){
   else {
     echo "<h1>Error entering post</h1>";
     echo "<form action='userPosts.php'><input type='submit' value='Go Back'>";
-  }
+  }*/
 ?>

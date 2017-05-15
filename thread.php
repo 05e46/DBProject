@@ -1,15 +1,6 @@
 <?php
 session_start();
 include('header.php');
-
-$db = new mysqli('127.0.0.1','root','','dbproject'); #(ip address, username, password, database)
-
-$title = $_POST['threadName'];
-
-if($_POST['submit']){
-  $sql = "INSERT into thread (title) VALUES ('$title')";
-}
-
 ?>
 
 <body>
@@ -93,13 +84,13 @@ if($_POST['submit']){
             <div class="modal-dialog">
 
                 <!-- Modal content-->
-                <div class="modal-content">
+                <form class="modal-content" action="threadcreate.php" method="POST">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                         <h4 class="modal-title">New Thread</h4>
                     </div>
                     <div class="modal-body">
-                      <input type="text" name="threadName" class="form-control" placeholder="Thread Name" required>
+                      <input type="text" name="title" class="form-control" placeholder="Thread Name" required>
                         <br />
                     </div>
                     <div class="modal-footer">

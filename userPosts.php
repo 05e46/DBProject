@@ -1,8 +1,6 @@
 <?php
 session_start();
 include('header.php');
-
-
 ?>
 
 <!-- go back to the thread page -->
@@ -49,7 +47,7 @@ include('header.php');
   <table width="1200px" border="0" align="center" cellpadding="0" cellspacing="1" bgcolor="#CCCCCC">
     <br>
       <tr>
-          <form name="form1" method="post" action="add_post.php">
+          <form method="post" action="add_post.php">
               <td>
                   <table width="100%" border="0" cellpadding="3" cellspacing="1" bgcolor="#FFFFFF">
                       <tr>
@@ -60,7 +58,7 @@ include('header.php');
                       <tr>
                           <td>&nbsp;</td>
                           <td><input name="id" type="hidden" value="<?php echo $id; ?>"></td>
-                          <td><input type="submit" name="Submit" value="Submit"> <input type="reset" name="Submit2" value="Reset"></td>
+                          <td><input type="submit" name="submit" value="Submit"> <input type="reset" name="Submit2" value="Reset"></td>
                       </tr>
                   </table>
               </td>
