@@ -25,7 +25,8 @@ include('header.php');
             <!-- Table data -->
             <tbody>
               <?php
-                $stmt = $db->prepare("SELECT Username, FullName, Status FROM User");
+                $stmt = $db->prepare("SELECT Username, FullName, Status FROM User WHERE NOT Username=?");
+                $stmt->bind_param("s", $_SESSION['user']);
                 $stmt->execute();
                 $stmt->bind_result($user, $name, $status);
                 while ($stmt->fetch() == TRUE) {
@@ -35,10 +36,27 @@ include('header.php');
                   <td>'.$name.'</td>
                   <td>'.$status.'</td>
                   <td>
-                    <button><span href="remove.php?account="'.$user.'" class="glyphicon glyphicon-trash"></span></button>
-                  </td>
-                  </tr>
-                  ';
+                    <button><a href="account.php?account='.$user.'&action=delete" class="glyphicon glyphicon-trash"> Delete</a></button>';
+                    //Differing buttons appear based on user status
+                    if ($status == "user") {
+                      echo '
+                      <button><a href="account.php?account='.$user.'&action=moderator" class="glyphicon glyphicon-knight"> Make Moderator</a></button>
+                      <button><a href="account.php?account='.$user.'&action=admin" class="glyphicon glyphicon-king"> Make Admin</a></button>
+                      ';
+                    }
+                    else if ($status == "moderator"){
+                      echo '
+                      <button><a href="account.php?account='.$user.'&action=user" class="glyphicon glyphicon-pawn"> Make User</a></button>
+                      <button><a href="account.php?account='.$user.'&action=admin" class="glyphicon glyphicon-king"> Make Admin</a></button>
+                      ';
+                    }
+                    else {
+                      echo '
+                      <button><a href="account.php?account='.$user.'&action=user" class="glyphicon glyphicon-pawn"> Make User</a></button>
+                      <button><a href="account.php?account='.$user.'&action=moderator" class="glyphicon glyphicon-knight"> Make Moderator</a></button>
+                      ';
+                    }
+                    echo '</td></tr>';
                 }
                 $stmt->close();
               ?>
@@ -56,21 +74,24 @@ include('header.php');
                   <th>Forum Name</th>
                   <th>Description</th>
                   <th>Requesting Moderator</th>
-                  <th>Options</th>
+                  <th>Approve/Deny</th>
                 </tr>
               </thead>
               <tbody>
               <?php
-                $stmt = $db->prepare("SELECT ForumName, Description, StartModerator FROM Forum WHERE Status = 'request'");
+                $stmt = $db->prepare("SELECT ForumId, ForumName, Description, StartModerator FROM Forum WHERE Status = 'request'");
                 $stmt->execute();
-                $stmt->bind_result($forumName, $description, $startMod);
+                $stmt->bind_result($id, $forumName, $description, $startMod);
                 while ($stmt->fetch() == TRUE) {
                   echo '
                   <tr>
                   <td>'.$forumName.'</td>
                   <td>'.$description.'</td>
-                  <td>'.$starter.'</td>
-                  <td></td>
+                  <td>'.$startMod.'</td>
+                  <td>
+                    <button><a href="manageRequests.php?id='.$id.'&action=approve" class="glyphicon glyphicon-check"> Approve</a></button>
+                    <button><a href="manageRequests.php?id='.$id.'&action=deny" class="glyphicon glyphicon-trash"> Deny</a></button>
+                  </td>
                   </tr>
                   ';
                 }
