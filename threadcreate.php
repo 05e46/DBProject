@@ -16,7 +16,8 @@ if(isset($_REQUEST['submit'])!='')
     }
     else
     {
-        $sql="INSERT INTO thread(threadID, Title, StartUser, ranking) VALUES('$threadID','".$_REQUEST['title']."', '$user', '$rank')";
+        $sql="INSERT INTO thread(ForumNo, Title, StartUser)
+         VALUES('$threadID','".$_REQUEST['title']."', '$user')";
         $res=mysqli_query($con,$sql);
         if($res)
         {

@@ -1,6 +1,7 @@
 <?php
 session_start();
 include('header.php');
+$threadID = $_SESSION['threadID'];
 ?>
 
 <!-- go back to the thread page -->
@@ -16,15 +17,15 @@ include('header.php');
   <tbody>
     <div id="postarea">
     <?php
-    $stmt = $db->prepare("SELECT threadNo, postId, postuser, postText, uploadDate FROM Post" );
+    $stmt = $db->prepare("SELECT threadNo, postId, postuser, postText, uploadDate FROM Post WHERE threadNo = $threadID" );
     $stmt->execute();
     $stmt->bind_result($threadNo, $postId, $postuser, $postText, $uploadDate);
-    $threadID = $_SESSION['threadID'];
+    //$threadID = $_SESSION['threadID'];
 
     //check threadId and threadNo, then display
     //if ($threadID == $threadNo) {
     while ($stmt->fetch() == TRUE) {
-      if ($threadID == $threadNo) {
+      //if ($threadID == $threadNo) {
       echo '
       <tr>
         <td>
@@ -42,10 +43,10 @@ include('header.php');
       </tr>
       <br>
       ';
-    //}
+    }
     $stmt->close();
-  }
-}
+  //}
+//}
     ?>
   </tbody>
 

@@ -9,7 +9,6 @@ if(! $con)
 die('Connection Failed'.mysql_error());
 }
 $user = $_SESSION['user'];
-
 if(isset($_REQUEST['submit'])!='')
 {
     If($_REQUEST['postText']=='')
@@ -18,7 +17,8 @@ if(isset($_REQUEST['submit'])!='')
     }
     else
     {
-        $sql="INSERT INTO post(threadNo,postText,uploadDate,postUser) VALUES('$threadID','".$_REQUEST['postText']."', NOW() , '$user')";
+        $sql="INSERT INTO post(threadNo,postText,uploadDate,postUser)
+        VALUES('$threadID','".$_REQUEST['postText']."', NOW() , '$user')";
         $res=mysqli_query($con,$sql);
         if($res)
         {
