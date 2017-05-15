@@ -22,7 +22,7 @@ $user = $_SESSION['user'];
       <tbody>
         <?php
           $id = $_GET["id"];
-          $stmt = $db->prepare("SELECT threadID, Title, StartUser, Ranking FROM Thread WHERE ForumNo = $id");
+          $stmt = $db->prepare("SELECT threadID, Title, StartUser, ranking FROM Thread WHERE ForumNo = $id");
           $stmt->execute();
           $stmt->bind_result($threadID, $threadName, $starter, $rank);
           while ($stmt->fetch() == TRUE) {
@@ -78,6 +78,8 @@ $user = $_SESSION['user'];
           //show the request forum button on bottom of page
             echo '<button type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#createthread" style="float: right">Add New Thread</button>';
         }
+        $_SESSION['threadID'] = $threadID;
+        //$_SESSION['ranking'] = $rank;
         ?>
 
         <!-- Modal -->

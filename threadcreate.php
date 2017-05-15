@@ -4,7 +4,8 @@ if(! $con)
 {
 die('Connection Failed'.mysql_error());
 }
-
+$threadID = $_SESSION['threadID'];
+//$rank = $_SESSION['ranking'];
 $user = $_SESSION['user'];
 
 if(isset($_REQUEST['submit'])!='')
@@ -15,7 +16,7 @@ if(isset($_REQUEST['submit'])!='')
     }
     else
     {
-        $sql="INSERT INTO thread(title,status,StartUser,ranking) VALUES('".$_REQUEST['title']."' ,'open', '$user', '0')";
+        $sql="INSERT INTO thread(threadID, Title, StartUser, ranking) VALUES('$threadID','".$_REQUEST['title']."', '$user', '$rank')";
         $res=mysqli_query($con,$sql);
         if($res)
         {
