@@ -24,15 +24,18 @@
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav">
                         <?php
-                      if (basename($_SERVER['PHP_SELF']) != "dashboard.php") {
-                        echo '<li><a id= "dashboardButton" href="/dashboard.php">Dashboard</a></li>';
-                      }
-                      if (basename($_SERVER['PHP_SELF']) != "forum.php") {
-                        echo '<li><a id="forumButton" href="/forum.php">Forums</a></li>';
-                      }
-                      if (basename($_SERVER['PHP_SELF']) != "chatroom.php") {
-                        echo '<li><a id="chatroomButton" href="/chatroom.php">Chatrooms</a></li>';
-                      }
+                          if (basename($_SERVER['PHP_SELF']) != "dashboard.php") {
+                            echo '<li><a id= "dashboardButton" href="/dashboard.php">Dashboard</a></li>';
+                          }
+                          if (basename($_SERVER['PHP_SELF']) != "forum.php") {
+                            echo '<li><a id="forumButton" href="/forum.php">Forums</a></li>';
+                          }
+                          if (basename($_SERVER['PHP_SELF']) != "chatroom.php") {
+                            echo '<li><a id="chatroomButton" href="/chatroom.php">Chatrooms</a></li>';
+                          }
+                          if ($_SESSION['status'] == "admin") {
+                            echo '<li><a id="adminSettings" href="/admin.php">Admin Settings</a></li>';
+                          }
                     ?>
                             <!-- <li><a id="chatButton" href="#">Chatrooms</a></li> -->
                     </ul>
