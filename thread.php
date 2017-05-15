@@ -72,11 +72,10 @@ include('header.php');
         <div class="container">
 
         <?php
-        /*if $_SESSION['user'] == 'moderator' && $_SESSION['user'] == 'admin' {
+        if ($_SESSION['user'] == 'moderator' || $_SESSION['user'] == 'admin') {
           //show the request forum button on bottom of page
-          <!-- Trigger the request Modal -->*/
             echo '<button type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#createthread" style="float: right">Add New Thread</button>';
-        //}
+        }
         ?>
 
         <!-- Modal -->

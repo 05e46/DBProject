@@ -4,7 +4,6 @@ if(! $con)
 {
 die('Connection Failed'.mysql_error());
 }
-//mysql_select_db(dbpro,$con);
 
 $user = $_SESSION['user'];
 
@@ -16,7 +15,7 @@ if(isset($_REQUEST['submit'])!='')
     }
     else
     {
-        $sql="INSERT INTO thread(title,StartUser) VALUES('".$_REQUEST['title']."', '$user')";
+        $sql="INSERT INTO thread(title,status,StartUser,ranking) VALUES('".$_REQUEST['title']."' ,'open', '$user', '0')";
         $res=mysqli_query($con,$sql);
         if($res)
         {
