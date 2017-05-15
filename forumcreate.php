@@ -1,8 +1,8 @@
 <?php session_start();
-$con = mysqli_connect('localhost', 'root', '', 'dbproject');
-if(! $con)
-{
-die('Connection Failed'.mysql_error());
+$db = new mysqli('127.0.0.1','phpAdmin','password','practice'); #(ip address, username, password, database)
+if(!$db){
+  echo "Error connecting to database.";
+  exit;
 }
 //mysql_select_db(dbpro,$con);
 
@@ -16,17 +16,31 @@ if(isset($_REQUEST['submit'])!='')
     }
     else
     {
-        $sql="INSERT INTO forum(forumName,description,StartModerator) VALUES('".$_REQUEST['forumName']."', '".$_REQUEST['description']."', '$user')";
-        $res=mysqli_query($con,$sql);
-        if($res)
-        {
-            header("Location: forum.php");
-            $sql->close();
-            $con->close();
+        if ($_SESSION['status'] != "admin") {
+          $stmt = $db->prepare("INSERT INTO FORUM (ForumName, Description, StartModerator) VALUES (?, ?, ?)");
+          $stmt->bind_param("sss", $_REQUEST['forumName'], $_REQUEST['description'], $_SESSION['user']);
+          if($stmt->execute())
+          {
+              $stmt->close();
+              $db->close();
+              echo '<h1>Forum submitted for approval</h1>';
+              echo '<button><a href="forum.php">Back to Forums</a></button>';
+          }
+          else
+          {
+            echo "Something went wrong, can not add the forum";
+          }
         }
-        else
-        {
-          echo "Something went wrong, can not add the forum";
+        else {
+          $status = "open";
+          $stmt = $db->prepare("INSERT INTO FORUM (ForumName, Description, StartModerator, Status) VALUES (?, ?, ?, ?)");
+          $stmt->bind_param("ssss", $_REQUEST['forumName'], $_REQUEST['description'], $_SESSION['user'], $status);
+          if($stmt->execute()) {
+            $stmt->close();
+            $db->close();
+            echo '<h1>Forum sucessfully created</h1>';
+            echo '<button><a href="forum.php">Back to Forums</a></button>';
+          }
         }
     }
 }

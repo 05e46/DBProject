@@ -19,7 +19,7 @@ include('header.php');
 
               <?php
               // get ForumId, ForumName, Description, StartModerator from Forum table
-              $stmt = $db->prepare("SELECT ForumId, ForumName, Description, StartModerator FROM Forum");
+              $stmt = $db->prepare("SELECT ForumId, ForumName, Description, StartModerator FROM Forum WHERE Status = 'open'");
               $stmt->execute();
               $stmt->bind_result($id, $forumName, $description, $starter);
               while ($stmt->fetch() == TRUE) {
@@ -72,7 +72,7 @@ include('header.php');
             <?php
             // moderators can request forums
             if ($_SESSION['status'] == 'moderator'){
-                echo '<button type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#requestForum" style="float: right">Request Forum</button>';
+                echo '<button type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#newForum" style="float: right">Request Forum</button>';
             }
             ?>
 
