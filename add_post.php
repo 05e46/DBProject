@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('header.php');
+include('header.php');  
 
 $con = mysqli_connect('localhost', 'root', '', 'dbproject');
 if(! $con)

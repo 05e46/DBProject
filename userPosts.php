@@ -11,16 +11,21 @@ include('header.php');
     <h1>Posts</h1>
   </div>
 
-
   <!-- Tables to display the posts -->
   <table width="800px" border="0" align="center" cellpadding="0" cellspacing="1" bgcolor="#CCCCCC">
   <tbody>
     <div id="postarea">
     <?php
-    $stmt = $db->prepare("SELECT postId, postuser, postText, uploadDate FROM Post" );
+    $stmt = $db->prepare("SELECT threadNo, postId, postuser, postText, uploadDate FROM Post" );
     $stmt->execute();
-    $stmt->bind_result($postId, $postuser, $postText, $uploadDate);
+    $stmt->bind_result($threadNo, $postId, $postuser, $postText, $uploadDate);
+    $threadID = $_SESSION['threadID'];
+    $_SESSION['threadNo'] = $threadNo;
+
+    //check threadId and threadNo, then display
+    //if ($threadID == $threadNo) {
     while ($stmt->fetch() == TRUE) {
+      //if ($threadID == $threadNo) {
       echo '
       <tr>
         <td>
@@ -40,6 +45,8 @@ include('header.php');
       ';
     }
     $stmt->close();
+  //}
+//}
     ?>
   </tbody>
 
