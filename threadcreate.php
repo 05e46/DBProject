@@ -1,5 +1,6 @@
 <?php session_start();
 $con = mysqli_connect('localhost', 'root', '', 'dbproject');
+$id = $_SESSION['id'];
 if(! $con)
 {
 die('Connection Failed'.mysql_error());
@@ -16,8 +17,8 @@ if(isset($_REQUEST['submit'])!='')
     }
     else
     {
-        $sql="INSERT INTO thread(ForumNo, Title, StartUser)
-         VALUES('$threadID','".$_REQUEST['title']."', '$user')";
+        $sql="INSERT INTO thread(forumNo, threadID, Title, StartUser)
+         VALUES('$id','$threadID','".$_REQUEST['title']."', '$user')";
         $res=mysqli_query($con,$sql);
         if($res)
         {

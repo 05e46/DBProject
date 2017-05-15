@@ -21,10 +21,12 @@ $user = $_SESSION['user'];
       </thead>
       <tbody>
         <?php
-          $id = $_GET["id"];
-          $stmt = $db->prepare("SELECT threadID, Title, StartUser, ranking FROM Thread WHERE ForumNo = $id");
+          $id = (isset($_GET['id']) ? $_GET['id'] : '');
+          //get the threadId, title, startuser and ranking from thread where the forumno is connect to number forum
+          $stmt = $db->prepare("SELECT threadID, Title, StartUser, ranking FROM Thread WHERE forumNo = $id");
           $stmt->execute();
           $stmt->bind_result($threadID, $threadName, $starter, $rank);
+
           while ($stmt->fetch() == TRUE) {
             echo '
             <tr>
@@ -79,6 +81,8 @@ $user = $_SESSION['user'];
             echo '<button type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#createthread" style="float: right">Add New Thread</button>';
         }
         $_SESSION['threadID'] = $threadID;
+        $_SESSION['id'] = $id;
+
         //$_SESSION['ranking'] = $rank;
         ?>
 

@@ -20,12 +20,9 @@ $threadID = $_SESSION['threadID'];
     $stmt = $db->prepare("SELECT threadNo, postId, postuser, postText, uploadDate FROM Post WHERE threadNo = $threadID" );
     $stmt->execute();
     $stmt->bind_result($threadNo, $postId, $postuser, $postText, $uploadDate);
-    //$threadID = $_SESSION['threadID'];
 
     //check threadId and threadNo, then display
-    //if ($threadID == $threadNo) {
     while ($stmt->fetch() == TRUE) {
-      //if ($threadID == $threadNo) {
       echo '
       <tr>
         <td>
@@ -45,8 +42,6 @@ $threadID = $_SESSION['threadID'];
       ';
     }
     $stmt->close();
-  //}
-//}
     ?>
   </tbody>
 
