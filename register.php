@@ -31,13 +31,20 @@ if(isset($_REQUEST['submit'])!='')
     {
         $sql="INSERT INTO user(username,fullname,password) VALUES('".$_REQUEST['username']."', '".$_REQUEST['fullname']."', '".$_REQUEST['password']."')";
         $res=mysqli_query($con,$sql);
+        $username = $_REQUEST['username'];
         if($res)
         {
-            Echo "Record successfully inserted";
+            session_start();
+            $_SESSION['user'] = $username;
+            $_SESSION['login'] = $password;
+            $_SESSION['status'] = $status;
+            header("Location: dashboard.php");
+            $sql->close();
+            $con->close();
         }
         else
         {
-          Echo "There is some problem in inserting record";
+          echo "Username is already taken";
         }
     }
 }

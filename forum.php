@@ -63,7 +63,7 @@ include('header.php');
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="submit" name="newforum_btn" class="btn btn-primary">New Forum</button>
+                            <button type="submit" name="submit" class="btn btn-primary">New Forum</button>
                         </div>
                     </form>
                 </div>
