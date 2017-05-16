@@ -1,34 +1,32 @@
 <?php session_start();
-$con = mysqli_connect('localhost', 'root', '', 'dbproject');
-$id = $_SESSION['id'];
-if(! $con)
-{
-die('Connection Failed'.mysql_error());
+$db = new mysqli('127.0.0.1', 'phpAdmin', 'password', 'practice');
+//$db = new mysqli('127.0.0.1','root','','dbproject'); #(ip address, username, password, database)
+if(!$db){
+  echo "Error connecting to database.";
+  exit;
 }
 $threadID = $_SESSION['threadID'];
-//$rank = $_SESSION['ranking'];
 $user = $_SESSION['user'];
 
 if(isset($_REQUEST['submit'])!='')
 {
-    If($_REQUEST['title']=='')
+    if($_REQUEST['title']=='')
     {
         Echo "please fill the empty field.";
     }
     else
     {
-        $sql="INSERT INTO thread(forumNo, threadID, Title, StartUser)
-         VALUES('$id','$threadID','".$_REQUEST['title']."', '$user')";
-        $res=mysqli_query($con,$sql);
-        if($res)
-        {
-            header("Location: thread.php");
-            $sql->close();
-            $con->close();
+        $query="INSERT INTO Thread (forumNo, threadID, title, startUser) VALUES(?,?,?,?)";
+        $stmt = $db->prepare($query);
+        $stmt->bind_param("ssss", $_REQUEST['forumId'], $threadID, $_REQUEST['title'], $user);
+        if ($stmt->execute()){
+          $stmt->close();
+          $db->close();
+          header('Location: thread.php?id='.$_REQUEST['forumId'].'');
         }
         else
         {
-          echo "Something went wrong, can not add the forum";
+          echo "Something went wrong, can not add the thread";
         }
     }
 }

@@ -1,15 +1,4 @@
 <?php session_start();
-<<<<<<< Updated upstream
-=======
-$con = mysqli_connect('localhost', 'root', '', 'dbproject');
-if(! $con)
-{
-die('Connection Failed'.mysql_error());
-}
-
-$user = $_SESSION['user'];
->>>>>>> Stashed changes
-
 //$db = new mysqli('ecsmysql','cs431s25','ixupeijo','cs431s25');
 $db = new mysqli('127.0.0.1', 'phpAdmin', 'password', 'practice');
 //$db = new mysqli('127.0.0.1','root','','dbproject'); #(ip address, username, password, database)
