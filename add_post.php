@@ -1,11 +1,10 @@
 <?php
 session_start();
-include('header.php');
 $threadID = $_REQUEST['thread'];
 $user = $_SESSION['user'];
 $forum = $_REQUEST['forum'];
 
-$db = mysqli_connect('127.0.0.1', 'phpAdmin', 'password', 'practice');
+$db = new mysqli('127.0.0.1', 'phpAdmin', 'password', 'practice');
 if(!$db) {
   die('Connection Failed'.mysql_error());
 }
@@ -15,12 +14,12 @@ if(isset($_REQUEST['submit'])!='') {
     }
     else
     {
-        $stmt = $db->prepare("INSERT INTO Post(threadNo, postText, postUser) VALUES(?,?,?)");
+        $stmt = $db->prepare("INSERT INTO Post (threadNo, postText, postUser) VALUES(?,?,?)");
         $stmt->bind_param("sss", $threadID, $_REQUEST['postText'], $user);
         if ($stmt->execute()){
           $stmt->close();
           $db->close();
-          header("Location: userPosts.php?id='.$threadID.'&forum='.$forum.");
+          header("Location: userPosts.php?id=$threadID&forum=$forum.");
         }
         else
         {
