@@ -28,17 +28,34 @@ include('header.php');
           echo '</table>';
         }
         $stmt->close();
-        $db->close();
+
+        $stmt = $db->prepare("SELECT status FROM Thread WHERE threadID=?");
+        $stmt->bind_param("s", $_REQUEST['id']);
+        $stmt->execute();
+        $stmt->bind_result($state);
+        while ($stmt->fetch()){
+          if ($state == "closed"){
+            $stmt->close();
+            $db->close();
+            exit;
+          }
+          else {
+            $stmt->close();
+            $db->close();
+            echo'
+            <form method="post" action="add_post.php">
+              <textarea name="postText" cols="45" rows="3" id="postText"></textarea>
+              <input name="forum" type="hidden" value="'.$_REQUEST['forum'].'">
+              <input name="thread" type="hidden" value="'.$_REQUEST['id'].'">
+              <div class="pull-left">
+                <input type="submit" name="submit" value="Add Post">
+              </div>
+            </form>
+            ';
+          }
+        }
+      
         ?>
-        <!-- Where the user can enter their posts -->
-        <form method="post" action="add_post.php">
-          <textarea name="postText" cols="45" rows="3" id="postText"></textarea>
-          <input name="forum" type="hidden" value="<?php echo $_REQUEST['forum'] ?>">
-          <input name="thread" type="hidden" value="<?php echo $_REQUEST['id'] ?>">
-          <div class="pull-left">
-            <input type="submit" name="submit" value="Add Post">
-          </div>
-        </form>
       </div>
     </div>
   </div>
