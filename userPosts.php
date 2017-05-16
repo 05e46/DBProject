@@ -20,9 +20,12 @@ include('header.php');
           echo '
             <table class="table table-striped table-bordered table-hover">
               <tr>
-              <td style="width:100px;"><strong>'.$postUser.'</strong></td>
-              <td>'.$postText.'</td>
-            </table>';
+              <td style="width:100px;background-color:darkgrey;"><strong>'.$postUser.'</strong></td>
+              <td style="width:750px;">'.$postText.'</td>';
+              if (($_SESSION['status'] == "admin") || ($_SESSION['status'] == "moderator")){
+                echo '<td align="right"><button><a href="deletePost.php?id='.$postId.'&action=delete&forum='.$_REQUEST['forum'].'&thread='.$_REQUEST['id'].'">Delete Post</a></button>';
+              }
+          echo '</table>';
         }
         $stmt->close();
         $db->close();
