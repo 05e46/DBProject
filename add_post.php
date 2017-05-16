@@ -1,34 +1,30 @@
 <?php
 session_start();
 include('header.php');
-$threadID = $_SESSION['threadID'];
-
-$con = mysqli_connect('localhost', 'root', '', 'dbproject');
-if(! $con)
-{
-die('Connection Failed'.mysql_error());
-}
+$threadID = $_REQUEST['thread'];
 $user = $_SESSION['user'];
-if(isset($_REQUEST['submit'])!='')
-{
-    If($_REQUEST['postText']=='')
-    {
-        Echo "please fill the empty field.";
+$forum = $_REQUEST['forum'];
+
+$db = mysqli_connect('127.0.0.1', 'phpAdmin', 'password', 'practice');
+if(!$db) {
+  die('Connection Failed'.mysql_error());
+}
+if(isset($_REQUEST['submit'])!='') {
+    if($_REQUEST['postText']=='') {
+        Echo "Please fill the empty field.";
     }
     else
     {
-        $sql="INSERT INTO post(threadNo,postText,uploadDate,postUser)
-        VALUES('$threadID','".$_REQUEST['postText']."', NOW() , '$user')";
-        $res=mysqli_query($con,$sql);
-        if($res)
-        {
-            header("Location: userPosts.php");
-            $sql->close();
-            $con->close();
+        $stmt = $db->prepare("INSERT INTO Post(threadNo, postText, postUser) VALUES(?,?,?)");
+        $stmt->bind_param("sss", $threadID, $_REQUEST['postText'], $user);
+        if ($stmt->execute()){
+          $stmt->close();
+          $db->close();
+          header("Location: userPosts.php?id='.$threadID.'&forum='.$forum.");
         }
         else
         {
-          echo "Something went wrong, can not add the forum";
+          echo "Something went wrong, can not add the post";
         }
     }
 }

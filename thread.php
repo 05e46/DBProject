@@ -7,48 +7,18 @@ $user = $_SESSION['user'];
 
 <body>
   <div class="flex-container">
-    <div class="pull-left">
-      <button><a id="backToForum" href="/forum.php">Back to Forums</a></button>
-      <h1>Forum Threads</h1>
-  </div>
-  <div class="container">
-
-  <?php
-  if ($_SESSION['status'] == 'moderator' || $_SESSION['status'] == 'admin') {
-    //show the request forum button on bottom of page
-      echo '<button type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#createthread" style="float: right">Add New Thread</button>';
-  }
-  $_SESSION['threadID'] = $threadID;
-  $_SESSION['id'] = $id;
-
-  //$_SESSION['ranking'] = $rank;
-  ?>
-
-  <!-- Modal -->
-  <div class="modal fade" id="createthread" role="dialog">
-      <div class="modal-dialog">
-
-          <!-- Modal content-->
-          <form class="modal-content" action="threadcreate.php" method="POST">
-              <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal">&times;</button>
-                  <h4 class="modal-title">New Thread</h4>
-              </div>
-              <div class="modal-body">
-                <input type="text" name="title" class="form-control" placeholder="Thread Name" required>
-                  <br />
-                <label>Forum No:</label>
-                <input type="text" name="forumId" value="<?php echo $_REQUEST['id'] ?>" readonly>
-              </div>
-              <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                  <button type="submit" name="submit" class="btn btn-primary">New Thread</button>
-              </div>
-          </div>
+      <div class="pull-left">
+        <button><a id="backToForum" href="/forum.php">Back to Forums</a></button>
+        <h1>Forum Threads</h1>
       </div>
-  </div>
-
-
+      <div>
+      <?php
+      if ($_SESSION['status'] == 'moderator' || $_SESSION['status'] == 'admin') {
+        //show the request forum button on bottom of page
+          echo '<button type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#createthread" style="float: right">Add New Thread</button>';
+      }
+      ?>
+    </div>
   <table class="table table-striped table-bordered table-hover">
       <thead>
         <tr>
@@ -111,7 +81,7 @@ $user = $_SESSION['user'];
                 }
               else {echo'<td>Not yet ranked</td>';}
               echo '
-              <td>'.$status.'</td>;
+              <td>'.$status.'</td>
               <td>'.$starter.'</td>';
               if (($_SESSION['status'] == "admin") || ($_SESSION['status'] == "moderator")){
                 echo '<td>';
@@ -131,5 +101,30 @@ $user = $_SESSION['user'];
         ?>
       </tbody>
     </table>
+  </div>
+
+  <!-- Modal -->
+  <div class="container">
+    <div class="modal fade" id="createthread" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <form class="modal-content" action="threadcreate.php" method="POST">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"></button>
+                    <h4 class="modal-title">New Thread</h4>
+                </div>
+                <div class="modal-body">
+                  <input type="text" name="title" class="form-control" placeholder="Thread Name" required>
+                    <br />
+                  <label>Forum No:</label>
+                  <input type="text" name="forumId" value="<?php echo $_REQUEST['id'] ?>" readonly>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" name="submit" class="btn btn-primary">New Thread</button>
+                </div>
+            </form>
+        </div>
+    </div>
   </div>
 </body>

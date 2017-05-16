@@ -1,70 +1,52 @@
 <?php
 session_start();
 include('header.php');
-$threadID = $_SESSION['threadID'];
+$threadID = $_REQUEST['threadID'];
 ?>
 
 <!-- go back to the thread page -->
 <body>
   <div class="flex-container">
-    <div class="pull-left">
-      <?php echo '<a id="backToThread" href="/Thread.php?id='.$_REQUEST['forum'].'">Back to Threads</a>' ?>
+    <a id="backToThread" href="/Thread.php?id=<?php echo $_REQUEST['forum']?>">Back to Threads</a>
       <!-- <a id="backToThread" href="/Thread.php?id=<?php $_REQUEST['forum']?>">Back to Threads</a> -->
     <h1>Posts</h1>
+    <div class="row">
+      <div id="postarea" class="col-sm-12">
+        <?php
+        $stmt = $db->prepare("SELECT threadNo, postId, postUser, postText, uploadDate, Status FROM Post JOIN User WHERE threadNo = ?" );
+        $stmt->bind_param("s", $threadID);
+        $stmt->execute();
+        $stmt->bind_result($threadNo, $postId, $postUser, $postText, $uploadDate, $status);
+
+        //check threadId and threadNo, then display
+        while ($stmt->fetch() == TRUE) {
+          echo '<div class="row">
+          <div class="col-sm-12">
+            <div id="tb-testimonial" class="testimonial testimonial-default">
+              <div class="testimonial-section">'.$postText.'</div>
+                      <div class="testimonial-desc">
+                          <div class="testimonial-writer">
+                          	<div class="testimonial-writer-name">'.$postUser.'</div>
+                          	<div class="testimonial-writer-designation">'.$status.'</div>
+                          </div>
+                      </div>
+              </div>
+            </div>
+          </div>';
+        }
+        $stmt->close();
+        $db->close();
+        ?>
+        <!-- Where the user can enter their posts -->
+        <form method="post" action="add_post.php">
+          <textarea name="postText" cols="45" rows="3" id="postText"></textarea>
+          <input name="forum" type="hidden" value="<?php echo $_REQUEST['forum'] ?>">
+          <input name="thread" type="hidden" value="<?php echo $threadID ?>">
+          <div class="pull-left">
+            <input type="submit" name="submit" value="Add Post">
+          </div>
+        </form>
+      </div>
+    </div>
   </div>
-
-  <!-- Tables to display the posts -->
-  <table width="800px" border="0" align="center" cellpadding="0" cellspacing="1" bgcolor="#CCCCCC">
-  <tbody>
-    <div id="postarea">
-    <?php
-    $stmt = $db->prepare("SELECT threadNo, postId, postuser, postText, uploadDate FROM Post WHERE threadNo = $threadID" );
-    $stmt->execute();
-    $stmt->bind_result($threadNo, $postId, $postuser, $postText, $uploadDate);
-
-    //check threadId and threadNo, then display
-    while ($stmt->fetch() == TRUE) {
-      echo '
-      <tr>
-        <td>
-          <table width="100%" border="0" cellpadding="3" cellspacing="1" bordercolor="1" bgcolor="#FFFFFF">
-              <td>
-                <table width="100%" border="2" cellpadding="3" cellspacing="1" bgcolor="#FFFFFF">
-                  <tr>
-                    <td bgcolor="#F8F7F1">'.$postText.'</td>
-                  </tr>
-                    <td width="50%" bgcolor="#F8F7F1">User: '.$postuser.'</td>
-                    <td width="50%" bgcolor="#F8F7F1">Datetime: '.$uploadDate.'</td>
-                </table>
-              </td>
-          </td>
-      </tr>
-      <br>
-      ';
-    }
-    $stmt->close();
-    ?>
-  </tbody>
-
-  <!-- Where the user can enter their posts -->
-  <table width="1200px" border="0" align="center" cellpadding="0" cellspacing="1" bgcolor="#CCCCCC">
-    <br>
-      <tr>
-          <form method="post" action="add_post.php">
-              <td>
-                  <table width="100%" border="0" cellpadding="3" cellspacing="1" bgcolor="#FFFFFF">
-                      <tr>
-                          <td valign="top"><strong>Post</strong></td>
-                          <td valign="top">:</td>
-                          <td><textarea name="postText" cols="45" rows="3" id="postText"></textarea></td>
-                      </tr>
-                      <tr>
-                          <td>&nbsp;</td>
-                          <td><input name="id" type="hidden" value="<?php echo $id; ?>"></td>
-                          <td><input type="submit" name="submit" value="Submit"> <input type="reset" name="Submit2" value="Reset"></td>
-                      </tr>
-                  </table>
-              </td>
-          </form>
-      </tr>
-  </table>
+</body>
